@@ -1,42 +1,26 @@
-/*
-Yuyang Zhang
-APCS2 pd01
-HW15 -- So So Quick
-2017-03-09
-*/
+
 
 /*****************************************************
  * class QuickSort
- * (skeleton) <<delete this line if untrue>>
  * Implements quicksort algo to sort an array of ints in place
  *
  * 1. Summary of QuickSort algorithm:
- * QSort(arr): It first picks a pivot within the array. After doing so,
-   all numbers before this pivot will be less than it and all numbers 
-   after it will be greater. We now have to sections. We then chose two new 
-   pivots within each section. This process will continue until the entire list 
-   is sorted.
+ * QSort(arr):
+ * 1. If bounds overlap stop.
+ * 2. pick a random pivot point to create a partition about.
+ * 3. call quick sort on two halves from the partition
  *
  * 2a. Worst pivot choice / array state and associated runtime: 
- * The worst case would perhaps be the state when the entire array is sorted
-   backwards. The pivot would then be the first or last index. This runtime
-   would be O(n^2).
-
+ *     max number of comparisons
+ *     pivot is the largest or smallest in the list O(n^2).
+ *
  * 2b. Best pivot choice / array state and associated runtime:
- * If the array is already sorted, then this would be the best case.
-   O(n) would be the runtime as no numbers will be switched around.
-
+ *     pivot is the median of the elements O(nlogn).
+ *
  * 3. Approach to handling duplicate values in array:
- * While I am unsure what the issue would be we may simply
- use the values as pivots. This way duplicates would simply
- be placed next to them. This may be fixed with the use of >= or <=.
+ *    No Approach. this is already handled by partition.
+ *
  *****************************************************/
-
-/***
-    PROTIP: Assume no duplicates during initial development phase.
-    Once you have a working implementation, test against arrays 
-    with duplicate values, and revise if necessary. (Backup first.)
- ***/
 
 public class QuickSort 
 {
@@ -80,59 +64,60 @@ public class QuickSort
     /*****************************************************
      * void qsort(int[])
      * @param d -- array of ints to be sorted in place
+     * Precond: input array isn't empty
+     * Postcond: input array sorted nothing returned
      *****************************************************/
-    public static void qsort( int[] arr ) 
-    { 
-	int left = 0;
-	int right = arr.length;
-	int pivot = (left + right) / 2;
+    public static void qsort( int[] d ) { 
+	qsort(d, 0, d.length-1);
+    }
 
-	while (left <= right){
-	    while ((arr[left] <= arr[pivot] && left < pivot)){
-		left += 1;
-	    }
-	    while ((arr[right] > arr[pivot])){
-		right -= 1;
-	    }
-	    if (left <= right){
-		swap (left, right , arr);
-		left += 1;
-		right -= 1;
-	    }
-	}
-	if (right > left){
-	     qsort(arr);
-	}
-	if (left < right){
-	    qsort(arr);
+    /*****************************************************
+     * void qsort(int[],int,int)
+     * @param d -- array of ints to be sorted in place
+     * @param left -- left bound
+     * @param right -- right bound
+     * Precond: input array isn't empty
+     * Postcond: input array sorted from left and right bound.
+     *****************************************************/
+    public static void qsort( int[] d, int left, int right ) {
+	//random pivot since there is no efficient way of picking a good pivot (median)
+	if (left < right) {  
+	    int pivot = partition(d, left, right, (int)(Math.random() * (right-left) + left)); 
+	    qsort(d, left, pivot-1);
+	    qsort(d, pivot+1, right);
 	}
     }
- 
-    // Thinkers are encouraged to roll their own subroutines.
-    // Insert your auxiliary helper methods here.
 
- public static int partition( int arr[], int left, int right, int pivot)
-    {
-	int v = arr[pivot];
-
-	swap( pivot, right, arr);
-	int stor = left;
-
-	for( int x = left; x < right; x +=1 ) {
-	    if ( arr[x] <= v) {
-		swap( x, stor, arr );
-		stor += 1;}
+    /******************************************************
+     * int partition(int[] arr,int left,int right,int pvtPos)
+     * Precond:  Input array isn't empty,
+     * integer inputs within bounds of input array
+     * Postcond: Input array modified such that
+     * values smaller then number at pvtPos are to the left of pvtPos,
+     * and values larger are to the right of pvtPos,
+     * index at pvtPos is now at its final resting place.
+     * new index of pvtPos returned
+     ******************************************************/
+    public static int partition (int[] arr, int left, int right, int pvtPos) {
+	int pvtVal = arr[pvtPos];
+	swap(pvtPos, right, arr);
+	int storVal = left;
+		
+	for (int i = left; i < right; i++) {
+	    if (arr[i] <= pvtVal) {
+		swap(i, storVal, arr);
+		storVal++;
+	    }
 	}
-	swap(stor,right,arr);
-
-	return stor;
-    }
+	swap(storVal, right, arr);
+		
+	return storVal;
+    }//end partition()
     
-	 
     //main method for testing
     public static void main( String[] args ) 
     {
-	 
+	///*~~~~s~l~i~d~e~~~m~e~~~d~o~w~n~~~~~~~~~~~~~~~~~~~~ (C-k, C-k, C-y) 
 
 	//get-it-up-and-running, static test case:
 	int [] arr1 = {7,1,5,12,3};
@@ -140,7 +125,7 @@ public class QuickSort
 	printArr(arr1);
 
 	qsort( arr1 );	
-	System.out.println("arr1 after qsort: " );
+       	System.out.println("arr1 after qsort: " );
 	printArr(arr1);
 
 	// randomly-generated arrays of n distinct vals
@@ -151,13 +136,17 @@ public class QuickSort
 	System.out.println("\narrN init'd to: " );
 	printArr(arrN);
 
-	shuffle(arrN);
-	System.out.println("arrN post-shuffle: " );
+       	shuffle(arrN);
+       	System.out.println("arrN post-shuffle: " );
 	printArr(arrN);
 
 	qsort( arrN );
 	System.out.println("arrN after sort: " );
 	printArr(arrN);
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+	///*~~~~s~l~i~d~e~~~m~e~~~d~o~w~n~~~~~~~~~~~~~~~~~~~~ (C-k, C-k, C-y) 
 
 	//get-it-up-and-running, static test case w/ dupes:
 	int [] arr2 = {7,1,5,12,3,7};
@@ -165,7 +154,7 @@ public class QuickSort
 	printArr(arr2);
 
 	qsort( arr2 );	
-	System.out.println("arr2 after qsort: " );
+       	System.out.println("arr2 after qsort: " );
 	printArr(arr2);
 
 
@@ -177,16 +166,15 @@ public class QuickSort
 	System.out.println("\narrMatey init'd to: " );
 	printArr(arrMatey);
 
-	shuffle(arrMatey);
-	System.out.println("arrMatey post-shuffle: " );
+       	shuffle(arrMatey);
+       	System.out.println("arrMatey post-shuffle: " );
 	printArr(arrMatey);
 
 	qsort( arrMatey );
 	System.out.println("arrMatey after sort: " );
 	printArr(arrMatey);
-
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
     }//end main
 
 }//end class QuickSort
-
