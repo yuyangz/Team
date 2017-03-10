@@ -15,7 +15,7 @@
 5. Methology:
   We first had a method that would help generate random arrays of certain lengths. We had various arrays ranging from size 1 to 100000. After doing so, we ran quicksort on each array 10000 times. The 10000 times were then averaged up to give the average runtime.
   
-6. Runtimes
+6. Runtimes (ns)
 
       Array Length of 1: 229
       
