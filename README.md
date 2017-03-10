@@ -16,16 +16,27 @@
   We first had a method that would help generate random arrays of certain lengths. We had various arrays ranging from size 1 to 100000. After doing so, we ran quicksort on each array 10000 times. The 10000 times were then averaged up to give the average runtime.
   
 6. Runtimes
+
       Array Length of 1: 229
+      
       Array Length of 5: 319
+      
       Array Length of 10: 503
+      
       Array Length of 50: 2925
+      
       Array Length of 100: 5526
+      
       Array Length of 500: 30794
+      
       Array Length of 1000: 58866
+      
       Array Length of 5000: 331088
+      
       Array Length of 10000: 610985
+      
       Array Length of 50000: 3255880
+      
       Array Length of 100000: 6767340
       
 7. How pivot selection and data arrangement affect execution time.
