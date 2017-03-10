@@ -194,10 +194,10 @@ public class QuickSort
 	System.out.println(timeApp(10000000,15)); //12161
 	*/
 	System.out.println(timeApp(1000000,20)); //1698
-	System.out.println(timeApp(100000,50)); //481
-	System.out.println(timeApp(100000,100)); // 981
-	System.out.println(timeApp(10000,500)); // 548
-	System.out.println(timeApp(1000,1000)); // 118
+	System.out.println(timeApp(100000,50)); //481 -> 4810
+	System.out.println(timeApp(100000,100)); // 981 -> 9810
+	System.out.println(timeApp(10000,500)); // 548 -> 54800
+	System.out.println(timeApp(1000,1000)); // 118 -> 118000
 
 	
     }//end main
