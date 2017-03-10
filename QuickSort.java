@@ -115,20 +115,17 @@ public class QuickSort
     }//end partition()
 
     public static long timeApp(int batchSize, int arrLen){
+       
 	long beg = System.currentTimeMillis();
+  
       	for(int i=0;i<batchSize;i++){
 	    
 	    qsort(buildArray(arrLen,10000));
 	
 	}
 	long end = System.currentTimeMillis();
-	
-	for(int i=0;i<batchSize;i++){
-	    
-	    qsort(buildArray(arrLen,10000));
-	}
-	long subtract=System.currentTimeMillis();
-	return end-beg -(subtract-end);
+	long timeElap = end-beg;
+	return timeElap;
     }
     //main method for testing
     public static void main( String[] args ) 
@@ -190,7 +187,19 @@ public class QuickSort
 	System.out.println("arrMatey after sort: " );
 	printArr(arrMatey);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	timeApp(1000000,1);s
+	/*
+	System.out.println(timeApp(10000000,10)); // 7669
+	System.out.println(timeApp(10000000,1)); //449
+	System.out.println(timeApp(10000000,5)); //3371
+	System.out.println(timeApp(10000000,15)); //12161
+	*/
+	System.out.println(timeApp(1000000,20)); //1698
+	System.out.println(timeApp(100000,50)); //481
+	System.out.println(timeApp(100000,100)); // 981
+	System.out.println(timeApp(10000,500)); // 548
+	System.out.println(timeApp(1000,1000)); // 118
+
+	
     }//end main
 
 	
