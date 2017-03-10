@@ -113,7 +113,23 @@ public class QuickSort
 		
 	return storVal;
     }//end partition()
-    
+
+    public static long timeApp(int batchSize, int arrLen){
+	long beg = System.currentTimeMillis();
+      	for(int i=0;i<batchSize;i++){
+	    
+	    qsort(buildArray(arrLen,10000));
+	
+	}
+	long end = System.currentTimeMillis();
+	
+	for(int i=0;i<batchSize;i++){
+	    
+	    qsort(buildArray(arrLen,10000));
+	}
+	long subtract=System.currentTimeMillis();
+	return end-beg -(subtract-end);
+    }
     //main method for testing
     public static void main( String[] args ) 
     {
@@ -174,7 +190,8 @@ public class QuickSort
 	System.out.println("arrMatey after sort: " );
 	printArr(arrMatey);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
+	timeApp(1000000,1);s
     }//end main
 
+	
 }//end class QuickSort
