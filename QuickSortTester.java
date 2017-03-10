@@ -13,11 +13,17 @@ public class QuickSortTester{
 	}
 	return sum / (arr.length - 1);
     }
-    
+
+    public static long timer (int[] arr){
+	long startTime = System.nanoTime();
+	QuickSort.qsort(arr);
+	long end = System.nanoTime();
+	return end - startTime;
+    }
     public static void main(String[] args){
 	int[] test1 = buildArray(1, 5);
 	int[] test2 = buildArray(5, 5);
-	int[] test3 = buildArray(10, 50);
+        int[] test3 = buildArray(10, 50);
 	int[] test4 = buildArray(50, 50);
 	int[] test5 = buildArray(100, 500);
 	int[] test6 = buildArray(500, 500);
@@ -42,13 +48,35 @@ public class QuickSortTester{
 	long[] res11 = new long[batchsize];
 
 	for (int x = 0 ; x  < batchsize; x += 1){
-	    long start = System.nanoTime();
-	    QuickSort.qsort(test1);
-	    long time = System.nanoTime() - start;
-	    res1[x] = time;
+	    res1[x] = timer(test1);
+	    res2[x] = timer(test2);
+	    res3[x] = timer(test3);
+	    res4[x] = timer(test4);
+	    res5[x] = timer(test5);
+	    res6[x] = timer(test6);
+	    res7[x] = timer(test7);
+	    res8[x] = timer(test8);
+	    res9[x] = timer(test9);
+	    res10[x] = timer(test10);
+	    res11[x] = timer(test11);
 	}
+
+	System.out.println("Averages");
+	System.out.println("Array Length of 1: " + average(res1));
+	System.out.println("Array Length of 5: " + average(res2));
+	System.out.println("Array Length of 10: " + average(res3));
+	System.out.println("Array Length of 50: " + average(res4));
+	System.out.println("Array Length of 100: " + average(res5));
+	System.out.println("Array Length of 500: " + average(res6));
+	System.out.println("Array Length of 1000: " + average(res7));
+	System.out.println("Array Length of 5000: " + average(res8));
+	System.out.println("Array Length of 10000: " + average(res9));
+	System.out.println("Array Length of 50000: " + average(res10));
+	System.out.println("Array Length of 100000: " + average(res11));
+	   
     }
 }
+
 
 					       
 	
