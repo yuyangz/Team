@@ -41,3 +41,6 @@
       
 7. How pivot selection and data arrangement affect execution time.
   THe median value of the unsorted array is used as the pivot. However, if the median index is the least value, this will end up being the worst case (same for biggest).If the array is already sorted, the sort will run logn.
+  
+Graph:
+https://docs.google.com/document/d/1TN7-v5kxcpJ0hcb5RdbljY71c8PWsUdG3gz2OeE4wQo/pub
